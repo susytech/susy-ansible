@@ -1,0 +1,5 @@
+app_name: cla-bot
+repo: git@github.com:susytech/sofcore-cla-bot.git
+pm2_template: ./roles/cla_bot/templates/pm2.json
+pm2_port: 80
+pm2_ssl_port: 443

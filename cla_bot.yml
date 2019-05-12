@@ -1,0 +1,11 @@
+- hosts:
+    - cla-bot
+  roles:
+    - { role: cla_bot,
+        tags: "cla-bot",
+        github_bot_user: "susy-cla-bot",
+        github_repo_owner: "susytech",
+        github_repo: "susy",
+        domain: "https://cla.susy.io",
+        ssl_cert: "{{susy_ssl_cert}}",
+        ssl_key: "{{susy_ssl_key}}" }

@@ -1,0 +1,4 @@
+app_name: vanity-service
+repo: git@github.com:susytech/vanity-service.git
+pm2_template: ./roles/vanity_service/templates/pm2.json
+mongo_db_name: vanity_service

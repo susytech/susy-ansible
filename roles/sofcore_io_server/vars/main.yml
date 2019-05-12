@@ -1,0 +1,4 @@
+repo: git@github.com:susytech/website.git
+install_dir: "{{base_dir}}/{{app_name}}"
+server_dir: "/var/www/{{app_name}}"
+nginx_template: ./roles/sofcore_io_server/templates/nginx.conf

@@ -1,0 +1,45 @@
+---
+- name: install nginx
+  become: yes
+  apt: name=nginx state=present
+
+- name: generate dhparams
+  shell: openssl dhparam -out dhparams.pem 2048 chdir={{base_dir}}
+  tags:
+    - slow
+
+- name: copy nginx site config
+  template: src={{app_template}} dest=/etc/nginx/sites-available/{{ app_name }}
+  tags: update
+  notify: reload nginx
+
+- name: Copy nginx configuration for server
+  become: yes
+  template: src=nginx.conf dest=/etc/nginx/nginx.conf
+  notify:
+    - reload nginx
+
+- name: start nginx
+  become: yes
+  service: name=nginx state=started enabled=true
+
+- name: link sites-availible to sites-enabled
+  file: src=/etc/nginx/sites-available/{{ app_name }} dest=/etc/nginx/sites-enabled/{{ app_name }} state=link
+  tags:
+  - update
+
+- name: "open port {{nginx_port}}"
+  become: yes
+  ufw: rule=allow port="{{nginx_port}}" proto=tcp
+  notify: reload ufw
+
+- name: open port "{{nginx_ssl_port}}"
+  become: yes
+  ufw: rule=allow port="{{nginx_ssl_port}}" proto=tcp
+  when: nginx_ssl_port is defined
+  notify: reload ufw
+
+- name: restart nginx
+  become: yes
+  service: name=nginx state=restarted
+  

@@ -1,0 +1,18 @@
+- include: install_python.yml
+  vars:
+    hosts: susy-stats
+  tags:
+    - dependency
+    - python
+    
+- hosts:
+    - susy-stats
+  roles:
+    - { role: stats,
+        secret: "{{susy_stats_secret}}",
+        domain_name: "stats.susy.io",
+        ssl_cert: "{{susy_ssl_cert}}",
+        ssl_key: "{{susy_ssl_key}}",
+        repo: "https://github.com/jesuscript/sof-netstats.git",
+        version: "default-colors"
+        }

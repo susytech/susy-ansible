@@ -1,0 +1,47 @@
+- name: create the key dir
+  when: inventory_hostname in groups['authorities']
+  file:
+    path: ~/.local/share/io.susy.sophon/keys/Kovan
+    state: directory
+
+- name: copy the run script
+  template: src="{{"authorities" if inventory_hostname in groups['authorities'] else "bootnodes"}}-run.sh" dest="{{base_dir}}/run.sh"
+  tags:
+    - init_chain
+    - run-script
+    - update
+    
+- name: copy the pm2 config
+  template: src=pm2.json dest="{{base_dir}}/kovan.json"
+  tags:
+    - init_chain
+    - pm2
+    - update
+
+- name: stop pm2
+  shell: pm2 kill
+  tags:
+    - init_chain
+    - restart
+    - pm2
+    - update
+
+- name: kill the db
+  shell: susy --chain kovan db kill
+  when: kill_db | bool
+  tags:
+    - init_chain
+    - restart
+    - pm2
+    - update
+  
+- name: start susy
+  shell: pm2 start "{{base_dir}}/kovan.json"
+  tags:
+    - init_chain
+    - restart
+    - pm2
+    - update
+  
+  
+

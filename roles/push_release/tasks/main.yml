@@ -1,0 +1,16 @@
+- name: create the keys dir
+  file:
+    path: "{{ server_key_location }}"
+    state: directory
+
+- name: copy the operations server key
+  copy: content="{{ operations_server_key }}" dest="{{ server_key_location }}/server.json"
+  tags:
+    - update
+
+- name: copy susy run-script
+  template: src=run-susy.sh dest="{{base_dir}}/run-susy.sh"
+  notify: restart pm2
+  tags:
+    - update
+

@@ -1,0 +1,15 @@
+ssl_cert: "{{susy_ssl_cert}}"
+ssl_key: "{{susy_ssl_key}}"
+service_name: "sms-verification"
+testnet_domain_names:
+  - sms-verification.susy.io
+  - sms-verification-test.susy.io
+mainnet_domain_names:
+  - sms-verification.susy.io
+  - sms-verification-main.susy.io
+testnet_nginx_ssl_port: 8443
+mainnet_nginx_ssl_port: 443
+testnet_app_port: 3001
+mainnet_app_port: 3000
+disable_http: yes
+service_repo: https://github.com/sofcore/sms-verification.git

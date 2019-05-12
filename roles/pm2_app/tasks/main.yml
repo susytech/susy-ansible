@@ -1,0 +1,16 @@
+- name: "open port {{pm2_port}}"
+  ufw: rule="{{'deny' if local_only else 'allow' }}" port="{{pm2_port}}" proto=tcp
+  notify: reload ufw
+  when: enable_ufw
+
+- name: "open ssl port {{pm2_ssl_port}}"
+  ufw: rule="{{'deny' if local_only else 'allow' }}" port="{{pm2_ssl_port}}" proto=tcp
+  when: pm2_ssl_port is defined
+  notify: reload ufw
+  when: enable_ufw
+
+- name: restart pm2
+  shell: pm2 kill && pm2 start {{pm2_config_path}}
+  tags:
+    - update
+    - restart

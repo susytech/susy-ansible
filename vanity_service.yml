@@ -1,0 +1,9 @@
+- hosts:
+    - vanity-service
+  roles:
+    - { role: vanity_service,
+        tags: "vanity-service",
+        port: 80,
+        current_milestone: "1.7",
+        ssl_cert: "{{sofcore_ssl_cert}}",
+        ssl_key: "{{sofcore_ssl_key}}" }

@@ -1,0 +1,28 @@
+- name: update software
+  apt: update_cache=yes
+  become: yes
+
+- name: install prereqs
+  apt: state=present pkg={{ item }}
+  become: yes
+  with_items:
+    - git
+    - build-essential
+    - python-software-properties
+    - python-dev
+    - python-pip
+    - curl
+    - ufw
+
+- name: open the ssh port
+  ufw: rule=allow port=22 proto=tcp state=enabled
+  when: enable_ufw
+  become: yes
+  
+- name: firewall default deny
+  ufw: state=disabled policy=deny
+  become: yes
+  when: enable_ufw
+
+
+

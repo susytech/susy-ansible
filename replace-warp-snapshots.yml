@@ -1,0 +1,8 @@
+- hosts:
+    - warp-bootnodes-homestead
+  roles:
+    - { role: replace_snapshots,
+        chain: homestead,
+        template_src: roles/warp-bootnodes/templates/run-susy.sh,
+        template_dest: "{{base_dir}}/run-susy.sh",
+        pm2_file: "{{base_dir}}/stats.json" }

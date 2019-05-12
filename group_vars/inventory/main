@@ -1,0 +1,16 @@
+[sofcore-io-server]
+13.81.216.245 user=root
+[vanity-service]
+104.46.55.93 user=root
+[cla-bot]
+52.232.122.193 user=root
+[morden-stats]
+146.185.136.131 user=root
+[miners-stats]
+163.172.154.106 user=root
+[susy-stats]
+13.93.6.81 user=root
+[kovan-stats]
+46.101.140.76
+[kovan-public-stats]
+104.236.45.153

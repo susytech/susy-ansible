@@ -1,0 +1,5 @@
+dependencies:
+  - { role: susy, tags: [susy,dependency] }
+  - { role: pm2,
+      app_name: "susy" }
+

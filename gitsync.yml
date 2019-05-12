@@ -1,0 +1,13 @@
+- include: install_python.yml
+  vars:
+    hosts: gitsync
+  tags: "dependency"
+
+- hosts:
+    - gitsync
+  roles:
+    - { role: gitsync,
+        ssl_cert: "{{susy_ssl_cert}}",
+        ssl_key: "{{susy_ssl_key}}",
+        git_src_address: "git@github.com:susytech/susy.git",
+        git_trg_address: "git@gitlab.susy.io:susy/susy.git" }

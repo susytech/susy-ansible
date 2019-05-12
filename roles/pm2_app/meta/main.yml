@@ -1,0 +1,3 @@
+dependencies:
+  - { role: pm2 }
+  - { role: node_app }

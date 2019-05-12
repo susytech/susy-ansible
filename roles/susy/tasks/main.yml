@@ -1,0 +1,20 @@
+- name: download new susy binary
+  get_url:
+    url: "{{ susy_deb_url }}"
+    dest: "{{base_dir}}/susy.deb"
+    force: yes
+  tags: update
+
+- name: install susy
+  shell: dpkg -i "{{base_dir}}/susy.deb"
+  become: yes
+  notify: restart pm2
+  tags: update
+
+- name: copy susy run-script
+  template: src=run-susy.sh dest="{{base_dir}}/run-susy.sh"
+  notify: restart pm2
+  when: run_susy_with is defined
+  tags:
+    - update
+

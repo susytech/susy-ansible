@@ -1,0 +1,12 @@
+- include: install_python.yml
+  tags: "dependency"
+
+- hosts:
+    - dissusy_website
+  vars:
+    ssl_install_path: /etc/nginx
+  roles:
+    - { role: dissusy_website,
+        app_name: dissusy_website,
+        ssl_cert: "{{ dissusy_ssl_cert }}",
+        ssl_key: "{{ dissusy_ssl_key }}"}

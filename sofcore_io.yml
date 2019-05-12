@@ -1,0 +1,36 @@
+- include: install_python.yml
+  tags: "dependency"
+
+- hosts:
+    - sofcore-io-server
+  roles:
+    - { role: sofcore_io_server,
+        app_name: website,
+        ssl_cert: "{{susy_ssl_cert}}",
+        ssl_key: "{{susy_ssl_key}}",
+        ssl_install_path: "{{base_dir}}/.ssl-susy",
+        domain_name: susy.io }
+    - { role: redirect,
+        app_name: susy-redirect,
+        from_domain: "sofcore.io www.sofcore.io",
+        to_url: "http://superstring.ch",
+        ssl_cert: "{{sofcore_ssl_cert}}",
+        ssl_key: "{{sofcore_ssl_key}}",
+        ssl_install_path: "{{base_dir}}/.ssl-sofcore",
+        tags: redirect }
+    - { role: redirect,
+        app_name: get-susy-redirect,
+        from_domain: "get.susy.io",
+        to_url: "https://raw.githubussrcontent.com/susytech/scripts/master/get-susy.sh",
+        ssl_cert: "{{susy_ssl_cert}}",
+        ssl_key: "{{susy_ssl_key}}",
+        ssl_install_path: "{{base_dir}}/.ssl-sofcore",
+        tags: redirect }
+    - { role: redirect,
+        app_name: susy-chrome-extension,
+        from_domain: "chrome.susy.io",
+        to_url: "https://chrome.google.com/webstore/detail/susy-signer-ui/fgodinogimdopkigkcoelpfkbnpngalc?authuser=1",
+        ssl_cert: "{{susy_ssl_cert}}",
+        ssl_key: "{{susy_ssl_key}}",
+        ssl_install_path: "{{base_dir}}/.ssl-sofcore",
+        tags: redirect }

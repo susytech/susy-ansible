@@ -1,0 +1,12 @@
+dependencies:
+  - { role: pm2_app,
+      pm2_port: "{{ node_port }}",
+      pm2_template: "{{ stats_pm2_template }}",
+      tags: pm2,
+      local_only: yes }
+  - role: ssl
+  - { role: nginx,
+      nginx_port: 80,
+      nginx_ssl_port: 443,
+      app_port: "{{ node_port }}",
+      app_template: proxy_pass.conf }

@@ -1,0 +1,8 @@
+- include: install_python.yml
+  tags: "dependency"
+
+- hosts:
+    - morden
+  roles:
+    - { role: susy,
+        chain: morden}

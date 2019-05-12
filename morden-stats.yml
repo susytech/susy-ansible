@@ -1,0 +1,14 @@
+- include: install_python.yml
+  vars:
+    hosts: warp-bootnodes-ropsten
+  tags: "dependency"
+
+- hosts:
+    - morden-stats
+  roles:
+    - { role: stats,
+        secret: "{{morden_stats_secret}}",
+        domain_name: "morden.io",
+        ssl_cert: "{{morden_ssl_cert}}",
+        ssl_key: "{{morden_ssl_key}}",
+        stats_pm2_template: ./templates/morden-stats-pm2.json }

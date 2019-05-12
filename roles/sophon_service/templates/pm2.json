@@ -1,0 +1,20 @@
+[
+  {
+    "name"              : "susy-mainnet",
+    "script"            : "run-susy-mainnet.sh",
+    "log_date_format"   : "YYYY-MM-DD HH:mm Z",
+    "merge_logs"        : false,
+    "watch"             : false,
+    "max_restarts"      : 10,
+    "exec_interpreter"  : "bash"
+  },
+  {
+    "name"              : "susy-testnet",
+    "script"            : "run-susy-testnet.sh",
+    "log_date_format"   : "YYYY-MM-DD HH:mm Z",
+    "merge_logs"        : false,
+    "watch"             : false,
+    "max_restarts"      : 10,
+    "exec_interpreter"  : "bash"
+  }
+]

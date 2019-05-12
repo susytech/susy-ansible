@@ -1,0 +1,8 @@
+- hosts:
+    - miners-stats
+  roles:
+    - { role: stats,
+        secret: "{{miners_stats_secret}}",
+        domain_name: "miners.susy.io",
+        ssl_cert: "{{susy_ssl_cert}}",
+        ssl_key: "{{susy_ssl_key}}" }
